@@ -108,7 +108,7 @@ function ProjectViewer({id,lang,zoom,setZoom,onBack}:{id:ProjectId;lang:Lang;zoo
 }
 
 function PhonePrototype(){
-  return <div className="iphone prototype-phone"><iframe title="同程旅行城市寻宝记 Figma 交互原型" src="https://embed.figma.com/proto/KagjxVHJIh8JD3erpi0UN8/%E4%BA%A4%E4%BA%92%E6%BC%94%E7%A4%BA?node-id=1-535&embed-host=share&hide-ui=1&scaling=scale-down&content-scaling=fixed" allowFullScreen/></div>;
+  return <div className="iphone prototype-phone"><iframe title="同程旅行城市寻宝记 Figma 交互原型" src="https://embed.figma.com/proto/KagjxVHJIh8JD3erpi0UN8/%E4%BA%A4%E4%BA%92%E6%BC%94%E7%A4%BA?node-id=1-535&embed-host=share&hide-ui=1&scaling=scale-down&content-scaling=fixed&portfolio-version=20260823-2" allowFullScreen/></div>;
 }
 
 function Life({title}:{title:string}){
