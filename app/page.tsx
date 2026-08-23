@@ -102,8 +102,8 @@ function ProjectViewer({id,lang,zoom,setZoom,onBack}:{id:ProjectId;lang:Lang;zoo
   const slices=Array.from({length:8},(_,i)=>`/assets/projects/${id}/${String(i+1).padStart(2,'0')}.webp`);
   return <div className="viewer">
     <div className="viewer-toolbar"><button onClick={onBack}>← {lang==='zh'?'项目文件夹':'Projects'}</button><div><b>{lang==='zh'?p.title:p.en}</b>{p.interactive&&<span>互动演示稍后上线</span>}</div><div className="zoom-tools"><button onClick={()=>setZoom(Math.max(.6,zoom-.1))}>−</button><span>{Math.round(zoom*100)}%</span><button onClick={()=>setZoom(Math.min(1.8,zoom+.1))}>＋</button><button onClick={()=>setZoom(1)}>↺</button></div></div>
-    {p.interactive&&<div className={`prototype-controls ${showPrototype?'':'is-collapsed'}`}>{showPrototype&&<aside className="prototype-placeholder"><div className="iphone"><span className="island"/><div><b>INTERACTIVE<br/>DEMO</b><small>COMING SOON</small></div></div><p>{lang==='zh'?'手机交互演示暂不展示':'Interactive mobile demo coming later'}</p></aside>}<button className="prototype-toggle" onClick={()=>setShowPrototype(!showPrototype)} aria-expanded={showPrototype}>{showPrototype?(lang==='zh'?'隐藏演示':'Hide demo'):(lang==='zh'?'显示演示':'Show demo')}</button></div>}
-    <div className="viewer-canvas"><div className="long-image" style={{width:`${zoom*100}%`}}>{slices.map((src,i)=><img src={src} alt={`${p.title} ${i+1}`} key={src}/>)}</div></div>
+    {p.interactive&&<button className="prototype-toggle" onClick={()=>setShowPrototype(!showPrototype)} aria-expanded={showPrototype}>{showPrototype?(lang==='zh'?'隐藏演示':'Hide demo'):(lang==='zh'?'显示演示':'Show demo')}</button>}
+    <div className="viewer-canvas"><div className="long-image" style={{width:`${zoom*100}%`}}>{slices.map((src,i)=><img src={src} alt={`${p.title} ${i+1}`} key={src}/>)}</div>{p.interactive&&showPrototype&&<aside className="prototype-placeholder"><div className="iphone"><span className="island"/><div><b>INTERACTIVE<br/>DEMO</b><small>COMING SOON</small></div></div><p>{lang==='zh'?'手机交互演示暂不展示':'Interactive mobile demo coming later'}</p></aside>}</div>
   </div>;
 }
 
