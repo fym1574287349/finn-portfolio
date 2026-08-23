@@ -42,4 +42,23 @@
 .prototype-toggle{top:calc(50% + 292px);right:163px;transform:translateX(50%)}
 @media(max-width:900px){.prototype-toggle{top:calc(50% + 212px);right:105px}}
 @media(max-width:560px){.prototype-toggle{top:calc(50% + 174px);right:79px}}
+
+/* Local interactive prototype */
+.prototype-phone{overflow:hidden;background:#fff}
+.prototype-phone .island{z-index:5;left:50%;transform:translateX(-50%);pointer-events:none}
+.prototype-screen{position:absolute;inset:0;overflow:hidden;border-radius:34px;background:#fff;animation:prototype-page-in .2s ease}
+.prototype-screen>img{display:block;width:100%;height:100%;object-fit:fill;user-select:none;-webkit-user-drag:none}
+.proto-hit{position:absolute;z-index:4;padding:0;border:0;background:transparent;border-radius:10px}
+.proto-hit:focus-visible{outline:2px solid #fff;outline-offset:-3px;background:#ffffff20}
+.hit-landmark{left:14%;top:25%;width:72%;height:40%}
+.hit-backpack{left:0;top:66%;width:24%;height:15%}
+.hit-tasks{right:0;top:66%;width:24%;height:15%}
+.hit-ranking{right:0;top:49%;width:24%;height:10%}
+.hit-lottery{right:0;top:58%;width:24%;height:10%}
+.hit-charge{left:25%;top:67%;width:53%;height:14%}
+.hit-back{left:0;top:0;width:22%;height:12%}
+.hit-continue{inset:0}
+@keyframes prototype-page-in{from{opacity:.35;transform:scale(1.015)}to{opacity:1;transform:scale(1)}}
+@media(max-width:900px){.prototype-screen{border-radius:25px}}
+@media(max-width:560px){.prototype-screen{border-radius:20px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}

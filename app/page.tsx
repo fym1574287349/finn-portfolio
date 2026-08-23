@@ -7,6 +7,7 @@ type Lang = 'zh' | 'en';
 type Section = 'resume' | 'projects' | 'life' | null;
 type ProjectId = 'zhouhu' | 'tongcheng' | 'redesign' | 'other';
 type HeroObject = 'portrait' | 'computer' | 'files';
+type PrototypeScreen = 'main-tiantan'|'main-gugong'|'main-leifeng'|'main-fota'|'backpack'|'tasks'|'ranking'|'lottery'|'game-ready'|'guide-1'|'guide-2'|'guide-3'|'game-start'|'game-play'|'game-result';
 
 const copy = {
   zh: {
@@ -103,8 +104,30 @@ function ProjectViewer({id,lang,zoom,setZoom,onBack}:{id:ProjectId;lang:Lang;zoo
   return <div className="viewer">
     <div className="viewer-toolbar"><button onClick={onBack}>← {lang==='zh'?'项目文件夹':'Projects'}</button><div><b>{lang==='zh'?p.title:p.en}</b>{p.interactive&&<span>互动演示稍后上线</span>}</div><div className="zoom-tools"><button onClick={()=>setZoom(Math.max(.6,zoom-.1))}>−</button><span>{Math.round(zoom*100)}%</span><button onClick={()=>setZoom(Math.min(1.8,zoom+.1))}>＋</button><button onClick={()=>setZoom(1)}>↺</button></div></div>
     {p.interactive&&<button className="prototype-toggle" onClick={()=>setShowPrototype(!showPrototype)} aria-expanded={showPrototype}>{showPrototype?(lang==='zh'?'隐藏演示':'Hide demo'):(lang==='zh'?'显示演示':'Show demo')}</button>}
-    <div className="viewer-canvas"><div className="long-image" style={{width:`${zoom*100}%`}}>{slices.map((src,i)=><img src={src} alt={`${p.title} ${i+1}`} key={src}/>)}</div>{p.interactive&&showPrototype&&<aside className="prototype-placeholder"><div className="iphone"><span className="island"/><div><b>INTERACTIVE<br/>DEMO</b><small>COMING SOON</small></div></div><p>{lang==='zh'?'手机交互演示暂不展示':'Interactive mobile demo coming later'}</p></aside>}</div>
+    <div className="viewer-canvas"><div className="long-image" style={{width:`${zoom*100}%`}}>{slices.map((src,i)=><img src={src} alt={`${p.title} ${i+1}`} key={src}/>)}</div>{p.interactive&&showPrototype&&<aside className="prototype-placeholder"><PhonePrototype/><p>{lang==='zh'?'点击手机页面体验完整交互':'Click the phone screen to explore'}</p></aside>}</div>
   </div>;
+}
+
+function PhonePrototype(){
+  const [screen,setScreen]=useState<PrototypeScreen>('main-tiantan');
+  const mainScreens:PrototypeScreen[]=['main-tiantan','main-gugong','main-leifeng','main-fota'];
+  const goMain=()=>setScreen('main-tiantan');
+  const nextLandmark=()=>setScreen(mainScreens[(mainScreens.indexOf(screen)+1)%mainScreens.length]);
+  const isMain=mainScreens.includes(screen);
+  const nextGame:Partial<Record<PrototypeScreen,PrototypeScreen>>={'game-ready':'guide-1','guide-1':'guide-2','guide-2':'guide-3','guide-3':'game-start','game-start':'game-play','game-play':'game-result','game-result':'main-tiantan'};
+  return <div className="iphone prototype-phone"><span className="island"/><div className="prototype-screen" key={screen}>
+    <img src={`/assets/prototype/${screen}.webp`} alt="城市寻宝记交互页面" draggable={false}/>
+    {isMain&&<>
+      <button className="proto-hit hit-landmark" onClick={nextLandmark} aria-label="切换城市地标"/>
+      <button className="proto-hit hit-backpack" onClick={()=>setScreen('backpack')} aria-label="打开背包"/>
+      <button className="proto-hit hit-tasks" onClick={()=>setScreen('tasks')} aria-label="打开任务"/>
+      <button className="proto-hit hit-ranking" onClick={()=>setScreen('ranking')} aria-label="打开排行榜"/>
+      <button className="proto-hit hit-lottery" onClick={()=>setScreen('lottery')} aria-label="打开抽奖池"/>
+      <button className="proto-hit hit-charge" onClick={()=>setScreen('game-ready')} aria-label="开始飞艇充能游戏"/>
+    </>}
+    {['backpack','tasks','ranking','lottery'].includes(screen)&&<button className="proto-hit hit-back" onClick={goMain} aria-label="返回主会场"/>}
+    {nextGame[screen]&&<button className="proto-hit hit-continue" onClick={()=>setScreen(nextGame[screen]!)} aria-label="继续"/>}
+  </div></div>;
 }
 
 function Life({title}:{title:string}){
