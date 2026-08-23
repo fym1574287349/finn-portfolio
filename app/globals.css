@@ -37,4 +37,9 @@
 @keyframes phone-in{from{opacity:0;transform:translateY(-43%) translateX(18px)}to{opacity:1;transform:translateY(-46%) translateX(0)}}
 @media(max-width:900px){.prototype-placeholder{display:block;right:10px;width:190px}.prototype-placeholder .iphone{width:165px;border-width:6px;border-radius:31px}.prototype-placeholder .island{top:8px;width:54px;height:16px}.prototype-placeholder p{padding:0 8px}.prototype-toggle{top:76px;right:12px}}
 @media(max-width:560px){.prototype-placeholder{right:4px;width:150px}.prototype-placeholder .iphone{width:132px;border-width:5px;border-radius:25px}.prototype-placeholder .iphone div b{font-size:14px}.prototype-placeholder .iphone div small{font-size:6px;margin-top:8px}.prototype-placeholder p{font-size:7px}.prototype-toggle{top:70px;right:8px;padding:8px 10px;font-size:8px}}
+
+/* Keep the phone unchanged; align its independent toggle directly below. */
+.prototype-toggle{top:calc(50% + 292px);right:163px;transform:translateX(50%)}
+@media(max-width:900px){.prototype-toggle{top:calc(50% + 212px);right:105px}}
+@media(max-width:560px){.prototype-toggle{top:calc(50% + 174px);right:79px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
