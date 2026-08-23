@@ -67,3 +67,17 @@
 /* Global click feedback */
 .click-spark-root{position:relative;min-height:100vh}
 .click-spark-canvas{position:fixed;z-index:9999;inset:0;display:block;pointer-events:none;user-select:none}
+
+/* Beyond Design masonry gallery */
+.masonry-list{position:relative;width:100%;margin-top:48px;transition:height .45s ease}
+.masonry-item{position:absolute;top:0;left:0;margin:0;padding:6px;border:0;background:transparent;will-change:transform,width,height,opacity;overflow:hidden;cursor:zoom-in}
+.masonry-item img{display:block;width:100%;height:100%;object-fit:cover;border-radius:14px;box-shadow:0 16px 45px #0006;transition:filter .25s ease}
+.masonry-item span{position:absolute;right:16px;bottom:16px;padding:7px 9px;border:1px solid #ffffff45;border-radius:99px;background:#080a20b8;color:#fff;font-size:7px;letter-spacing:.12em;opacity:0;transform:translateY(5px);transition:.25s;backdrop-filter:blur(10px)}
+.masonry-item:hover img,.masonry-item:focus-visible img{filter:brightness(.78)}
+.masonry-item:hover span,.masonry-item:focus-visible span{opacity:1;transform:translateY(0)}
+.masonry-item:focus-visible{outline:2px solid var(--lime);outline-offset:2px;border-radius:16px}
+.life-lightbox{position:fixed;z-index:120;inset:0;width:100%;height:100%;padding:5vh 5vw;border:0;background:#02030beF;display:grid;place-items:center;cursor:zoom-out;animation:lightbox-in .25s ease}
+.life-lightbox img{grid-area:1/1;max-width:90vw;max-height:88vh;width:auto;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 35px 100px #000}
+.life-lightbox span{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);padding:9px 13px;border:1px solid #ffffff2e;border-radius:99px;background:#090b20d9;color:#c9c8da;font-size:8px;letter-spacing:.1em;white-space:nowrap}
+@keyframes lightbox-in{from{opacity:0}to{opacity:1}}
+@media(max-width:560px){.masonry-list{margin-top:30px}.masonry-item{padding:4px}.masonry-item img{border-radius:10px}.life-lightbox{padding:3vh 3vw}.life-lightbox img{max-width:94vw;max-height:86vh}}

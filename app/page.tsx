@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ClickSpark from './components/ClickSpark';
+import Masonry, { MasonryItem } from './components/Masonry';
 
 type Lang = 'zh' | 'en';
 type Section = 'resume' | 'projects' | 'life' | null;
@@ -29,7 +30,24 @@ const projectData: Array<{id:ProjectId; folder:string; title:string; en:string; 
   { id:'other', folder:'/assets/folders/other.png', title:'其他设计作品', en:'Other Design Works', color:'#bd80ff', available:false, interactive:false },
 ];
 
-const lifeImages = ['收藏到 Room.jpg','收藏到 Pins by you.jpg','收藏到 阳台.jpg','收藏到 Sewing.jpg','收藏到 你创建的 Pin 图.png'];
+const lifeItems:MasonryItem[] = [
+  {id:'01',img:'/assets/life/travel-01.jpg',alt:'威尼斯水城与船只',ratio:1800/1080},
+  {id:'02',img:'/assets/life/收藏到 Room.jpg',alt:'生活空间灵感',ratio:1440/1080},
+  {id:'03',img:'/assets/life/travel-07.jpg',alt:'伦敦街头的春日光影',ratio:1080/1620},
+  {id:'04',img:'/assets/life/travel-02.jpg',alt:'加州盛夏海滩',ratio:1440/1080},
+  {id:'05',img:'/assets/life/travel-03.jpg',alt:'北京天坛建筑',ratio:1800/1080},
+  {id:'06',img:'/assets/life/收藏到 Pins by you.jpg',alt:'日常收藏与灵感',ratio:981/736},
+  {id:'07',img:'/assets/life/travel-04.jpg',alt:'城市街头群像',ratio:1621/1080},
+  {id:'08',img:'/assets/life/travel-08.jpg',alt:'伦敦城市天际线',ratio:1080/1621},
+  {id:'09',img:'/assets/life/travel-05.jpg',alt:'卢浮宫艺术参观',ratio:1440/1080},
+  {id:'10',img:'/assets/life/收藏到 阳台.jpg',alt:'阳台与空间观察',ratio:1200/800},
+  {id:'11',img:'/assets/life/travel-06.jpg',alt:'伦敦河畔风景',ratio:1440/1080},
+  {id:'12',img:'/assets/life/travel-09.jpg',alt:'揭阳古城烟花夜景',ratio:1440/1080},
+  {id:'13',img:'/assets/life/收藏到 Sewing.jpg',alt:'手作与缝纫灵感',ratio:920/736},
+  {id:'14',img:'/assets/life/travel-10.jpg',alt:'土耳其热气球旅行',ratio:1440/1080},
+  {id:'15',img:'/assets/life/travel-11.jpg',alt:'埃及金字塔与狮身人面像',ratio:1440/1080},
+  {id:'16',img:'/assets/life/收藏到 你创建的 Pin 图.png',alt:'日常视觉收藏',ratio:1086/833},
+];
 
 export default function Home() {
   const [lang,setLang] = useState<Lang>('zh');
@@ -113,5 +131,14 @@ function PhonePrototype(){
 }
 
 function Life({title}:{title:string}){
-  return <div className="content life-content"><p className="eyebrow">BEYOND DESIGN / LIFE ARCHIVE</p><h2>{title}</h2><div className="life-grid">{lifeImages.map((name,i)=><figure key={name} className={`life-${i+1}`}><Image src={`/assets/life/${name}`} alt={`生活灵感 ${i+1}`} width={900} height={1200}/><figcaption>0{i+1} / DAILY INSPIRATION</figcaption></figure>)}</div><div className="life-note"><b>生活、空间、手作与日常观察</b><p>这里会逐步替换为 Finn 的真实生活照片与兴趣记录。</p></div></div>;
+  const [selected,setSelected]=useState<MasonryItem|null>(null);
+  useEffect(()=>{
+    if(!selected) return;
+    const previous=document.body.style.overflow;
+    const close=(event:KeyboardEvent)=>event.key==='Escape'&&setSelected(null);
+    document.body.style.overflow='hidden';
+    window.addEventListener('keydown',close);
+    return ()=>{document.body.style.overflow=previous;window.removeEventListener('keydown',close)};
+  },[selected]);
+  return <div className="content life-content"><p className="eyebrow">BEYOND DESIGN / LIFE ARCHIVE</p><h2>{title}</h2><Masonry items={lifeItems} onSelect={setSelected}/><div className="life-note"><b>生活、空间、手作与日常观察</b><p>这里记录旅行、城市、艺术与日常生活中的视觉灵感。</p></div>{selected&&<button className="life-lightbox" onClick={()=>setSelected(null)} aria-label="关闭大图"><img src={selected.img} alt={selected.alt}/><span>点击任意位置关闭　×</span></button>}</div>;
 }
