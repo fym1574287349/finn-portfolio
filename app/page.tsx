@@ -7,7 +7,6 @@ type Lang = 'zh' | 'en';
 type Section = 'resume' | 'projects' | 'life' | null;
 type ProjectId = 'zhouhu' | 'tongcheng' | 'redesign' | 'other';
 type HeroObject = 'portrait' | 'computer' | 'files';
-type PrototypeScreen = 'main-tiantan'|'main-gugong'|'main-leifeng'|'main-fota'|'backpack'|'tasks'|'ranking'|'lottery'|'game-ready'|'guide-1'|'guide-2'|'guide-3'|'game-start'|'game-play'|'game-result';
 
 const copy = {
   zh: {
@@ -109,25 +108,7 @@ function ProjectViewer({id,lang,zoom,setZoom,onBack}:{id:ProjectId;lang:Lang;zoo
 }
 
 function PhonePrototype(){
-  const [screen,setScreen]=useState<PrototypeScreen>('main-tiantan');
-  const mainScreens:PrototypeScreen[]=['main-tiantan','main-gugong','main-leifeng','main-fota'];
-  const goMain=()=>setScreen('main-tiantan');
-  const nextLandmark=()=>setScreen(mainScreens[(mainScreens.indexOf(screen)+1)%mainScreens.length]);
-  const isMain=mainScreens.includes(screen);
-  const nextGame:Partial<Record<PrototypeScreen,PrototypeScreen>>={'game-ready':'guide-1','guide-1':'guide-2','guide-2':'guide-3','guide-3':'game-start','game-start':'game-play','game-play':'game-result','game-result':'main-tiantan'};
-  return <div className="iphone prototype-phone"><span className="island"/><div className="prototype-screen" key={screen}>
-    <img src={`/assets/prototype/${screen}.webp`} alt="城市寻宝记交互页面" draggable={false}/>
-    {isMain&&<>
-      <button className="proto-hit hit-landmark" onClick={nextLandmark} aria-label="切换城市地标"/>
-      <button className="proto-hit hit-backpack" onClick={()=>setScreen('backpack')} aria-label="打开背包"/>
-      <button className="proto-hit hit-tasks" onClick={()=>setScreen('tasks')} aria-label="打开任务"/>
-      <button className="proto-hit hit-ranking" onClick={()=>setScreen('ranking')} aria-label="打开排行榜"/>
-      <button className="proto-hit hit-lottery" onClick={()=>setScreen('lottery')} aria-label="打开抽奖池"/>
-      <button className="proto-hit hit-charge" onClick={()=>setScreen('game-ready')} aria-label="开始飞艇充能游戏"/>
-    </>}
-    {['backpack','tasks','ranking','lottery'].includes(screen)&&<button className="proto-hit hit-back" onClick={goMain} aria-label="返回主会场"/>}
-    {nextGame[screen]&&<button className="proto-hit hit-continue" onClick={()=>setScreen(nextGame[screen]!)} aria-label="继续"/>}
-  </div></div>;
+  return <div className="iphone prototype-phone"><iframe title="同程旅行城市寻宝记 Figma 交互原型" src="https://embed.figma.com/proto/KagjxVHJIh8JD3erpi0UN8/%E4%BA%A4%E4%BA%92%E6%BC%94%E7%A4%BA?node-id=1-535&embed-host=share&hide-ui=1&scaling=scale-down&content-scaling=fixed" allowFullScreen/></div>;
 }
 
 function Life({title}:{title:string}){
