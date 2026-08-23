@@ -56,7 +56,7 @@ export default function Home() {
       <Hotspot className="portrait" index="01" title={t.resume} en="ABOUT & RESUME" onClick={()=>openSection('resume')}/>
       <Hotspot className="computer" index="02" title={t.projects} en="SELECTED WORKS" onClick={()=>openSection('projects')}/>
       <Hotspot className="files" index="03" title={t.life} en="BEYOND DESIGN" onClick={()=>openSection('life')}/>
-      <div className="scroll-cue">{t.explore}<i>↓</i></div>
+      <div className="scroll-cue">{t.explore}</div>
     </section>
 
     {section && <section className={`panel panel-${section}`} aria-label={section}>
@@ -70,7 +70,10 @@ export default function Home() {
 }
 
 function Hotspot({className,index,title,en,onClick}:{className:string;index:string;title:string;en:string;onClick:()=>void}){
-  return <button className={`hotspot ${className}`} onClick={onClick}><span>{index}</span><b>{title}</b><small>{en}</small></button>;
+  return <button className={`hotspot ${className}`} onClick={onClick} aria-label={`${title} / ${en}`}>
+    <span className="object-glow" aria-hidden="true" />
+    <span className="hotspot-card"><span className="hotspot-index">{index}</span><b>{title}</b><small>{en}</small></span>
+  </button>;
 }
 
 function Resume({lang}:{lang:Lang}){
