@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 type Lang = 'zh' | 'en';
 type Section = 'resume' | 'projects' | 'life' | null;
 type ProjectId = 'zhouhu' | 'tongcheng' | 'redesign' | 'other';
+type HeroObject = 'portrait' | 'computer' | 'files';
 
 const copy = {
   zh: {
@@ -34,6 +35,7 @@ export default function Home() {
   const [section,setSection] = useState<Section>(null);
   const [project,setProject] = useState<ProjectId|null>(null);
   const [zoom,setZoom] = useState(1);
+  const [hoveredObject,setHoveredObject] = useState<HeroObject|null>(null);
   const t = copy[lang];
 
   useEffect(() => {
@@ -51,11 +53,14 @@ export default function Home() {
 
     <section className={`hero ${section?'hero-zoom':''}`} aria-label="Finn 的创意工作空间">
       <Image src="/assets/hero.png" alt="深蓝色的设计师工作室场景" fill priority sizes="100vw" />
+      <Image className={`hero-glow ${hoveredObject==='portrait'?'is-visible':''}`} src="/assets/hero-states/portrait.webp" alt="" fill priority sizes="100vw" aria-hidden="true" />
+      <Image className={`hero-glow ${hoveredObject==='computer'?'is-visible':''}`} src="/assets/hero-states/computer.webp" alt="" fill priority sizes="100vw" aria-hidden="true" />
+      <Image className={`hero-glow ${hoveredObject==='files'?'is-visible':''}`} src="/assets/hero-states/files.webp" alt="" fill priority sizes="100vw" aria-hidden="true" />
       <div className="hero-vignette" />
       <div className="intro"><p>WELCOME TO MY CREATIVE SPACE</p><h1>小明 <em>/ Finn</em></h1><h2>{t.intro.split('\n').map((line,i)=><span key={line}>{line}{i===0&&<br/>}</span>)}</h2><div className="status"><i/> AVAILABLE FOR CREATIVE PROJECTS</div></div>
-      <Hotspot className="portrait" index="01" title={t.resume} en="ABOUT & RESUME" onClick={()=>openSection('resume')}/>
-      <Hotspot className="computer" index="02" title={t.projects} en="SELECTED WORKS" onClick={()=>openSection('projects')}/>
-      <Hotspot className="files" index="03" title={t.life} en="BEYOND DESIGN" onClick={()=>openSection('life')}/>
+      <Hotspot className="portrait" index="01" title={t.resume} en="ABOUT & RESUME" onActive={setHoveredObject} onClick={()=>openSection('resume')}/>
+      <Hotspot className="computer" index="02" title={t.projects} en="SELECTED WORKS" onActive={setHoveredObject} onClick={()=>openSection('projects')}/>
+      <Hotspot className="files" index="03" title={t.life} en="BEYOND DESIGN" onActive={setHoveredObject} onClick={()=>openSection('life')}/>
       <div className="scroll-cue">{t.explore}</div>
     </section>
 
@@ -69,9 +74,8 @@ export default function Home() {
   </main>;
 }
 
-function Hotspot({className,index,title,en,onClick}:{className:string;index:string;title:string;en:string;onClick:()=>void}){
-  return <button className={`hotspot ${className}`} onClick={onClick} aria-label={`${title} / ${en}`}>
-    <span className="object-glow" aria-hidden="true" />
+function Hotspot({className,index,title,en,onClick,onActive}:{className:HeroObject;index:string;title:string;en:string;onClick:()=>void;onActive:(next:HeroObject|null)=>void}){
+  return <button className={`hotspot ${className}`} onClick={onClick} onMouseEnter={()=>onActive(className)} onMouseLeave={()=>onActive(null)} onFocus={()=>onActive(className)} onBlur={()=>onActive(null)} aria-label={`${title} / ${en}`}>
     <span className="hotspot-card"><span className="hotspot-index">{index}</span><b>{title}</b><small>{en}</small></span>
   </button>;
 }

@@ -25,4 +25,8 @@
 .scroll-cue i{display:none}
 @media(max-width:900px){.portrait{left:26%;top:61%;width:8%;height:12%}.computer{left:60%;top:55%;width:25%;height:24%}.files{left:82%;top:63%;width:7%;height:12%}.hotspot-card{width:126px}}
 @media(max-width:560px){.portrait{left:23%;top:64%;width:10%;height:11%}.computer{left:58%;top:57%;width:29%;height:22%}.files{left:83%;top:66%;width:9%;height:11%}.hotspot{padding:0;min-height:0}.hotspot-card{width:110px;min-height:64px;padding:8px}.hotspot-card b{font-size:11px}.hotspot-card small{font-size:6px}}
+
+.hero>img:first-of-type{z-index:-3}
+.hero>.hero-glow{z-index:-2;opacity:0;transition:opacity .48s cubic-bezier(.22,.61,.36,1);will-change:opacity}
+.hero>.hero-glow.is-visible{opacity:1}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
