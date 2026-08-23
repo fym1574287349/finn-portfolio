@@ -63,3 +63,7 @@
 @media(max-width:900px){.prototype-screen{border-radius:25px}}
 @media(max-width:560px){.prototype-screen{border-radius:20px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Global click feedback */
+.click-spark-root{position:relative;min-height:100vh}
+.click-spark-canvas{position:fixed;z-index:9999;inset:0;display:block;pointer-events:none;user-select:none}

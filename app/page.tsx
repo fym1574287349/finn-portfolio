@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import ClickSpark from './components/ClickSpark';
 
 type Lang = 'zh' | 'en';
 type Section = 'resume' | 'projects' | 'life' | null;
@@ -45,7 +46,7 @@ export default function Home() {
 
   const openSection = (next:Exclude<Section,null>) => { setSection(next); setProject(null); setZoom(1); };
 
-  return <main className="site-shell">
+  return <ClickSpark sparkColor="#baff69" sparkSize={12} sparkRadius={28} sparkCount={8} duration={450}><main className="site-shell">
     <header className="topbar">
       <button className="brand" onClick={() => setSection(null)} aria-label="返回首页"><span>FINN</span><small>{t.role.toUpperCase()}</small></button>
       <div className="top-actions"><button className="language" onClick={() => setLang(lang==='zh'?'en':'zh')}>{lang==='zh'?'EN':'中文'}</button><a href="mailto:1574287349@qq.com">CONTACT ↗</a></div>
@@ -71,7 +72,7 @@ export default function Home() {
       {section==='projects' && project && <ProjectViewer id={project} lang={lang} zoom={zoom} setZoom={setZoom} onBack={()=>setProject(null)}/>} 
       {section==='life' && <Life title={t.lifeTitle}/>} 
     </section>}
-  </main>;
+  </main></ClickSpark>;
 }
 
 function Hotspot({className,index,title,en,onClick,onActive}:{className:HeroObject;index:string;title:string;en:string;onClick:()=>void;onActive:(next:HeroObject|null)=>void}){
