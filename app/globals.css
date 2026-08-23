@@ -29,4 +29,12 @@
 .hero>img:first-of-type{z-index:-3}
 .hero>.hero-glow{z-index:-2;opacity:0;transition:opacity .48s cubic-bezier(.22,.61,.36,1);will-change:opacity}
 .hero>.hero-glow.is-visible{opacity:1}
+
+/* Fixed interactive phone preview */
+.prototype-placeholder{position:fixed;z-index:30;top:50%;right:28px;width:270px;transform:translateY(-46%);animation:phone-in .28s ease both}
+.prototype-toggle{position:fixed;z-index:31;top:96px;right:32px;padding:10px 14px;border:1px solid #ffffff35;border-radius:999px;background:#0b0d27e8;color:#f6f4ff;font-size:9px;letter-spacing:.1em;backdrop-filter:blur(14px);box-shadow:0 10px 30px #0006;transition:border-color .2s,background .2s}
+.prototype-toggle:hover,.prototype-toggle:focus-visible{border-color:#ffbc4c;background:#201d34;outline:none}
+@keyframes phone-in{from{opacity:0;transform:translateY(-43%) translateX(18px)}to{opacity:1;transform:translateY(-46%) translateX(0)}}
+@media(max-width:900px){.prototype-placeholder{display:block;right:10px;width:190px}.prototype-placeholder .iphone{width:165px;border-width:6px;border-radius:31px}.prototype-placeholder .island{top:8px;width:54px;height:16px}.prototype-placeholder p{padding:0 8px}.prototype-toggle{top:76px;right:12px}}
+@media(max-width:560px){.prototype-placeholder{right:4px;width:150px}.prototype-placeholder .iphone{width:132px;border-width:5px;border-radius:25px}.prototype-placeholder .iphone div b{font-size:14px}.prototype-placeholder .iphone div small{font-size:6px;margin-top:8px}.prototype-placeholder p{font-size:7px}.prototype-toggle{top:70px;right:8px;padding:8px 10px;font-size:8px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}

@@ -96,12 +96,14 @@ function Projects({lang,choose,onOpen}:{lang:Lang;choose:string;onOpen:(id:Proje
 }
 
 function ProjectViewer({id,lang,zoom,setZoom,onBack}:{id:ProjectId;lang:Lang;zoom:number;setZoom:(n:number)=>void;onBack:()=>void}){
+  const [showPrototype,setShowPrototype] = useState(true);
   const p=projectData.find(x=>x.id===id)!;
   if(!p.available) return <div className="content coming-soon"><button onClick={onBack}>← {lang==='zh'?'返回文件夹':'Back to folders'}</button><Image src={p.folder} alt={p.title} width={1500} height={1500}/><h2>{lang==='zh'?p.title:p.en}</h2><p>{lang==='zh'?'项目内容正在整理，之后只需替换项目长图即可上线。':'Project content is being prepared. A new long image can be swapped in later.'}</p></div>;
   const slices=Array.from({length:8},(_,i)=>`/assets/projects/${id}/${String(i+1).padStart(2,'0')}.webp`);
   return <div className="viewer">
     <div className="viewer-toolbar"><button onClick={onBack}>← {lang==='zh'?'项目文件夹':'Projects'}</button><div><b>{lang==='zh'?p.title:p.en}</b>{p.interactive&&<span>互动演示稍后上线</span>}</div><div className="zoom-tools"><button onClick={()=>setZoom(Math.max(.6,zoom-.1))}>−</button><span>{Math.round(zoom*100)}%</span><button onClick={()=>setZoom(Math.min(1.8,zoom+.1))}>＋</button><button onClick={()=>setZoom(1)}>↺</button></div></div>
-    <div className="viewer-canvas"><div className="long-image" style={{width:`${zoom*100}%`}}>{slices.map((src,i)=><img src={src} alt={`${p.title} ${i+1}`} key={src}/>)}</div>{p.interactive&&<aside className="prototype-placeholder"><div className="iphone"><span className="island"/><div><b>INTERACTIVE<br/>DEMO</b><small>COMING SOON</small></div></div><p>{lang==='zh'?'手机交互演示暂不展示':'Interactive mobile demo coming later'}</p></aside>}</div>
+    {p.interactive&&<button className="prototype-toggle" onClick={()=>setShowPrototype(!showPrototype)} aria-expanded={showPrototype}>{showPrototype?(lang==='zh'?'隐藏演示':'Hide demo'):(lang==='zh'?'显示演示':'Show demo')}</button>}
+    <div className="viewer-canvas"><div className="long-image" style={{width:`${zoom*100}%`}}>{slices.map((src,i)=><img src={src} alt={`${p.title} ${i+1}`} key={src}/>)}</div>{p.interactive&&showPrototype&&<aside className="prototype-placeholder"><div className="iphone"><span className="island"/><div><b>INTERACTIVE<br/>DEMO</b><small>COMING SOON</small></div></div><p>{lang==='zh'?'手机交互演示暂不展示':'Interactive mobile demo coming later'}</p></aside>}</div>
   </div>;
 }
 
