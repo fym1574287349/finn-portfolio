@@ -37,4 +37,11 @@
 @keyframes phone-in{from{opacity:0;transform:translateY(-43%) translateX(18px)}to{opacity:1;transform:translateY(-46%) translateX(0)}}
 @media(max-width:900px){.prototype-placeholder{display:block;right:10px;width:190px}.prototype-placeholder .iphone{width:165px;border-width:6px;border-radius:31px}.prototype-placeholder .island{top:8px;width:54px;height:16px}.prototype-placeholder p{padding:0 8px}.prototype-toggle{top:76px;right:12px}}
 @media(max-width:560px){.prototype-placeholder{right:4px;width:150px}.prototype-placeholder .iphone{width:132px;border-width:5px;border-radius:25px}.prototype-placeholder .iphone div b{font-size:14px}.prototype-placeholder .iphone div small{font-size:6px;margin-top:8px}.prototype-placeholder p{font-size:7px}.prototype-toggle{top:70px;right:8px;padding:8px 10px;font-size:8px}}
+
+.prototype-controls{position:fixed;z-index:30;top:50%;right:28px;width:270px;transform:translateY(-46%);display:flex;flex-direction:column;align-items:center}
+.prototype-controls .prototype-placeholder{position:static;transform:none;width:100%;animation:phone-in .28s ease both}
+.prototype-controls .prototype-toggle{position:static;margin-top:8px;align-self:center}
+.prototype-controls.is-collapsed{top:auto;bottom:24px;transform:none}
+@media(max-width:900px){.prototype-controls{right:10px;width:190px}.prototype-controls .prototype-placeholder{display:block}.prototype-controls.is-collapsed{bottom:16px}}
+@media(max-width:560px){.prototype-controls{right:4px;width:150px}.prototype-controls.is-collapsed{bottom:10px}.prototype-controls .prototype-toggle{padding:8px 10px;font-size:8px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
