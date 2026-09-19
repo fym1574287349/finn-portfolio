@@ -4,10 +4,11 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ClickSpark from './components/ClickSpark';
 import Masonry, { MasonryItem } from './components/Masonry';
+import MemoryGame from './components/MemoryGame';
 
 type Lang = 'zh' | 'en';
 type Section = 'resume' | 'projects' | 'life' | null;
-type ProjectId = 'zhouhu' | 'tongcheng' | 'redesign' | 'other';
+type ProjectId = 'zhouhu' | 'tongcheng' | 'redesign' | 'other' | 'game';
 type HeroObject = 'portrait' | 'computer' | 'files';
 
 const copy = {
@@ -28,6 +29,7 @@ const projectData: Array<{id:ProjectId; folder:string; title:string; en:string; 
   { id:'tongcheng', folder:'/assets/folders/tongcheng.png', title:'同程旅行 APP — 城市寻宝记', en:'Tongcheng Travel — City Treasure Hunt', color:'#ffb63c', available:true, interactive:true },
   { id:'redesign', folder:'/assets/folders/redesign.png', title:'某某平台 — 优化改版', en:'Platform — UI/UX Redesign', color:'#68ef4e', available:false, interactive:true },
   { id:'other', folder:'/assets/folders/other.png', title:'其他设计作品', en:'Other Design Works', color:'#bd80ff', available:false, interactive:false },
+  { id:'game', folder:'/assets/folders/game.webp', title:'游戏 Demo 体验', en:'Game Demo', color:'#ff55bb', available:true, interactive:false },
 ];
 
 const lifeItems:MasonryItem[] = [
@@ -111,12 +113,13 @@ function Resume({lang}:{lang:Lang}){
 }
 
 function Projects({lang,choose,onOpen}:{lang:Lang;choose:string;onOpen:(id:ProjectId)=>void}){
-  return <div className="content projects-content"><p className="eyebrow">SELECTED WORKS / 2026</p><div className="section-heading"><h2>{choose}</h2><p>04 PROJECT FOLDERS<br/>02 AVAILABLE NOW</p></div><div className="folder-grid">{projectData.map((p,i)=><button key={p.id} style={{'--folder-color':p.color} as React.CSSProperties} onClick={()=>onOpen(p.id)}><span className="project-no">0{i+1}</span><Image src={p.folder} alt={p.title} width={1500} height={1500}/><b>{lang==='zh'?p.title:p.en}</b><small>{p.available?'OPEN PROJECT ↗':'COMING SOON'}</small></button>)}</div></div>;
+  return <div className="content projects-content"><p className="eyebrow">SELECTED WORKS / 2026</p><div className="section-heading"><h2>{choose}</h2><p>{String(projectData.length).padStart(2,'0')} PROJECT FOLDERS<br/>{String(projectData.filter(p=>p.available).length).padStart(2,'0')} AVAILABLE NOW</p></div><div className="folder-grid">{projectData.map((p,i)=><button key={p.id} style={{'--folder-color':p.color} as React.CSSProperties} onClick={()=>onOpen(p.id)}><span className="project-no">0{i+1}</span><Image src={p.folder} alt={p.title} width={1500} height={1500}/><b>{lang==='zh'?p.title:p.en}</b><small>{p.id==='game'?'PLAY DEMO ↗':p.available?'OPEN PROJECT ↗':'COMING SOON'}</small></button>)}</div></div>;
 }
 
 function ProjectViewer({id,lang,zoom,setZoom,onBack}:{id:ProjectId;lang:Lang;zoom:number;setZoom:(n:number)=>void;onBack:()=>void}){
   const [showPrototype,setShowPrototype] = useState(true);
   const p=projectData.find(x=>x.id===id)!;
+  if(id==='game') return <MemoryGame lang={lang} onBack={onBack}/>;
   if(!p.available) return <div className="content coming-soon"><button onClick={onBack}>← {lang==='zh'?'返回文件夹':'Back to folders'}</button><Image src={p.folder} alt={p.title} width={1500} height={1500}/><h2>{lang==='zh'?p.title:p.en}</h2><p>{lang==='zh'?'项目内容正在整理，之后只需替换项目长图即可上线。':'Project content is being prepared. A new long image can be swapped in later.'}</p></div>;
   const slices=Array.from({length:8},(_,i)=>`/assets/projects/${id}/${String(i+1).padStart(2,'0')}.webp`);
   return <div className="viewer">
