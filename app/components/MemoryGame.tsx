@@ -3,8 +3,9 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { gameReducer, initialGame, shuffleDeck } from './memory-game';
 import './MemoryGame.css';
+import { asset } from '../asset';
 
-const assetRoot = '/assets/game/';
+const assetRoot = asset('/assets/game/');
 const cardNames = ['幸运金币', '卡片二', '卡片三', '卡片四', '卡片五', '卡片六'];
 const sources = ['background.webp', 'card-back.webp', ...Array.from({ length: 6 }, (_, i) => `card-${i + 1}.webp`)];
 

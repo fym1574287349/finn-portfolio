@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import s from './room.module.css';
 import RoomScene from './room-scene';
+import { asset, route } from '../asset';
 
 type Section = 'work' | 'about' | 'life' | 'play' | 'note';
 const sections: { id: Section; name: string; en: string; object: string; x: number; y: number }[] = [
@@ -35,7 +36,7 @@ export default function Room() {
 
   return <main className={s.room}>
     <header className={s.header}>
-      <a className={s.brand} href="/room" aria-label="小明的工作室首页"><span className={s.monogram}>f.</span><span>小明的工作室<small>FINN’S LITTLE STUDIO</small></span></a>
+      <a className={s.brand} href={route('/room/')} aria-label="小明的工作室首页"><span className={s.monogram}>f.</span><span>小明的工作室<small>FINN’S LITTLE STUDIO</small></span></a>
       <span className={s.version}>3D 互动工作室 <span>360°</span></span>
     </header>
 
@@ -64,8 +65,8 @@ export default function Room() {
 }
 
 const projects = [
-  { id: 'zhouhu', category: 'IP 设计', title: '昼虎记账 APP', subtitle: 'IP 角色设计', image: '/assets/projects/zhouhu/01.webp' },
-  { id: 'tongcheng', category: '运营活动设计', title: '同程旅行 · 城市寻宝记', subtitle: '活动视觉与互动体验', image: '/assets/projects/tongcheng/01.webp' },
+  { id: 'zhouhu', category: 'IP 设计', title: '昼虎记账 APP', subtitle: 'IP 角色设计', image: asset('/assets/projects/zhouhu/01.webp') },
+  { id: 'tongcheng', category: '运营活动设计', title: '同程旅行 · 城市寻宝记', subtitle: '活动视觉与互动体验', image: asset('/assets/projects/tongcheng/01.webp') },
 ];
 
 function Works() {
@@ -77,7 +78,7 @@ function Works() {
   if (project) return <div ref={detailTop} className={s.projectDetail}>
     <button className={s.textButton} onClick={() => setSelected(null)}>← 返回作品列表</button>
     <h3>{project.title}</h3><p className={s.bodyText}>{project.subtitle}</p>
-    <div className={s.projectPages}>{Array.from({ length: 8 }, (_, index) => <img key={index} src={`/assets/projects/${project.id}/${String(index + 1).padStart(2, '0')}.webp`} alt={`${project.title} · 第 ${index + 1} 页`} loading="lazy" />)}</div>
+    <div className={s.projectPages}>{Array.from({ length: 8 }, (_, index) => <img key={index} src={asset(`/assets/projects/${project.id}/${String(index + 1).padStart(2, '0')}.webp`)} alt={`${project.title} · 第 ${index + 1} 页`} loading="lazy" />)}</div>
   </div>;
   const visible = projects.filter(item => category === '全部作品' || item.category === category);
   return <>
@@ -93,7 +94,7 @@ function About() {
 }
 
 function Life() {
-  return <><p className={s.bodyText}>设计之外，也想让你认识日常里的我。</p><div className={s.lifeGrid}><figure><img src="/assets/life/travel-01.jpg" alt="水城与船只 · 生活栏目示例" loading="lazy" /><figcaption>城市与旅行</figcaption></figure><figure><img src="/assets/life/收藏到 Room.jpg" alt="室内空间 · 灵感栏目示例" loading="lazy" /><figcaption>空间与收藏</figcaption></figure><figure><img src="/assets/life/收藏到 Sewing.jpg" alt="手作灵感 · 兴趣栏目示例" loading="lazy" /><figcaption>日常的小爱好</figcaption></figure></div><p className={s.previewNote}>这里沿用现有图库演示排版，之后根据你的真实兴趣重新整理。</p></>;
+  return <><p className={s.bodyText}>设计之外，也想让你认识日常里的我。</p><div className={s.lifeGrid}><figure><img src={asset('/assets/life/travel-01.jpg')} alt="水城与船只 · 生活栏目示例" loading="lazy" /><figcaption>城市与旅行</figcaption></figure><figure><img src={asset('/assets/life/收藏到 Room.jpg')} alt="室内空间 · 灵感栏目示例" loading="lazy" /><figcaption>空间与收藏</figcaption></figure><figure><img src={asset('/assets/life/收藏到 Sewing.jpg')} alt="手作灵感 · 兴趣栏目示例" loading="lazy" /><figcaption>日常的小爱好</figcaption></figure></div><p className={s.previewNote}>这里沿用现有图库演示排版，之后根据你的真实兴趣重新整理。</p></>;
 }
 
 const swatches = [

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ClickSpark from './components/ClickSpark';
 import Masonry, { MasonryItem } from './components/Masonry';
 import MemoryGame from './components/MemoryGame';
+import { asset } from './asset';
 
 type Lang = 'zh' | 'en';
 type Section = 'resume' | 'projects' | 'life' | null;
@@ -25,30 +26,30 @@ const copy = {
 };
 
 const projectData: Array<{id:ProjectId; folder:string; title:string; en:string; color:string; available:boolean; interactive:boolean}> = [
-  { id:'zhouhu', folder:'/assets/folders/zhouhu.png', title:'昼虎记账 APP — IP设计', en:'Zhouhu APP — IP Design', color:'#50baff', available:true, interactive:false },
-  { id:'tongcheng', folder:'/assets/folders/tongcheng.png', title:'同程旅行 APP — 城市寻宝记', en:'Tongcheng Travel — City Treasure Hunt', color:'#ffb63c', available:true, interactive:true },
-  { id:'redesign', folder:'/assets/folders/redesign.png', title:'某某平台 — 优化改版', en:'Platform — UI/UX Redesign', color:'#68ef4e', available:false, interactive:true },
-  { id:'other', folder:'/assets/folders/other.png', title:'其他设计作品', en:'Other Design Works', color:'#bd80ff', available:false, interactive:false },
-  { id:'game', folder:'/assets/folders/game.webp', title:'游戏 Demo 体验', en:'Game Demo', color:'#ff55bb', available:true, interactive:false },
+  { id:'zhouhu', folder:asset('/assets/folders/zhouhu.png'), title:'昼虎记账 APP — IP设计', en:'Zhouhu APP — IP Design', color:'#50baff', available:true, interactive:false },
+  { id:'tongcheng', folder:asset('/assets/folders/tongcheng.png'), title:'同程旅行 APP — 城市寻宝记', en:'Tongcheng Travel — City Treasure Hunt', color:'#ffb63c', available:true, interactive:true },
+  { id:'redesign', folder:asset('/assets/folders/redesign.png'), title:'某某平台 — 优化改版', en:'Platform — UI/UX Redesign', color:'#68ef4e', available:false, interactive:true },
+  { id:'other', folder:asset('/assets/folders/other.png'), title:'其他设计作品', en:'Other Design Works', color:'#bd80ff', available:false, interactive:false },
+  { id:'game', folder:asset('/assets/folders/game.webp'), title:'游戏 Demo 体验', en:'Game Demo', color:'#ff55bb', available:true, interactive:false },
 ];
 
 const lifeItems:MasonryItem[] = [
-  {id:'01',img:'/assets/life/travel-01.jpg',alt:'威尼斯水城与船只',ratio:1800/1080},
-  {id:'02',img:'/assets/life/收藏到 Room.jpg',alt:'生活空间灵感',ratio:1440/1080},
-  {id:'03',img:'/assets/life/travel-07.jpg',alt:'伦敦街头的春日光影',ratio:1080/1620},
-  {id:'04',img:'/assets/life/travel-02.jpg',alt:'加州盛夏海滩',ratio:1440/1080},
-  {id:'05',img:'/assets/life/travel-03.jpg',alt:'北京天坛建筑',ratio:1800/1080},
-  {id:'06',img:'/assets/life/收藏到 Pins by you.jpg',alt:'日常收藏与灵感',ratio:981/736},
-  {id:'07',img:'/assets/life/travel-04.jpg',alt:'城市街头群像',ratio:1621/1080},
-  {id:'08',img:'/assets/life/travel-08.jpg',alt:'伦敦城市天际线',ratio:1080/1621},
-  {id:'09',img:'/assets/life/travel-05.jpg',alt:'卢浮宫艺术参观',ratio:1440/1080},
-  {id:'10',img:'/assets/life/收藏到 阳台.jpg',alt:'阳台与空间观察',ratio:1200/800},
-  {id:'11',img:'/assets/life/travel-06.jpg',alt:'伦敦河畔风景',ratio:1440/1080},
-  {id:'12',img:'/assets/life/travel-09.jpg',alt:'揭阳古城烟花夜景',ratio:1440/1080},
-  {id:'13',img:'/assets/life/收藏到 Sewing.jpg',alt:'手作与缝纫灵感',ratio:920/736},
-  {id:'14',img:'/assets/life/travel-10.jpg',alt:'土耳其热气球旅行',ratio:1440/1080},
-  {id:'15',img:'/assets/life/travel-11.jpg',alt:'埃及金字塔与狮身人面像',ratio:1440/1080},
-  {id:'16',img:'/assets/life/收藏到 你创建的 Pin 图.png',alt:'日常视觉收藏',ratio:1086/833},
+  {id:'01',img:asset('/assets/life/travel-01.jpg'),alt:'威尼斯水城与船只',ratio:1800/1080},
+  {id:'02',img:asset('/assets/life/收藏到 Room.jpg'),alt:'生活空间灵感',ratio:1440/1080},
+  {id:'03',img:asset('/assets/life/travel-07.jpg'),alt:'伦敦街头的春日光影',ratio:1080/1620},
+  {id:'04',img:asset('/assets/life/travel-02.jpg'),alt:'加州盛夏海滩',ratio:1440/1080},
+  {id:'05',img:asset('/assets/life/travel-03.jpg'),alt:'北京天坛建筑',ratio:1800/1080},
+  {id:'06',img:asset('/assets/life/收藏到 Pins by you.jpg'),alt:'日常收藏与灵感',ratio:981/736},
+  {id:'07',img:asset('/assets/life/travel-04.jpg'),alt:'城市街头群像',ratio:1621/1080},
+  {id:'08',img:asset('/assets/life/travel-08.jpg'),alt:'伦敦城市天际线',ratio:1080/1621},
+  {id:'09',img:asset('/assets/life/travel-05.jpg'),alt:'卢浮宫艺术参观',ratio:1440/1080},
+  {id:'10',img:asset('/assets/life/收藏到 阳台.jpg'),alt:'阳台与空间观察',ratio:1200/800},
+  {id:'11',img:asset('/assets/life/travel-06.jpg'),alt:'伦敦河畔风景',ratio:1440/1080},
+  {id:'12',img:asset('/assets/life/travel-09.jpg'),alt:'揭阳古城烟花夜景',ratio:1440/1080},
+  {id:'13',img:asset('/assets/life/收藏到 Sewing.jpg'),alt:'手作与缝纫灵感',ratio:920/736},
+  {id:'14',img:asset('/assets/life/travel-10.jpg'),alt:'土耳其热气球旅行',ratio:1440/1080},
+  {id:'15',img:asset('/assets/life/travel-11.jpg'),alt:'埃及金字塔与狮身人面像',ratio:1440/1080},
+  {id:'16',img:asset('/assets/life/收藏到 你创建的 Pin 图.png'),alt:'日常视觉收藏',ratio:1086/833},
 ];
 
 export default function Home() {
@@ -73,10 +74,10 @@ export default function Home() {
     </header>
 
     <section className={`hero ${section?'hero-zoom':''}`} aria-label="Finn 的创意工作空间">
-      <Image src="/assets/hero.png" alt="深蓝色的设计师工作室场景" fill priority sizes="100vw" />
-      <Image className={`hero-glow ${hoveredObject==='portrait'?'is-visible':''}`} src="/assets/hero-states/portrait.webp" alt="" fill priority sizes="100vw" aria-hidden="true" />
-      <Image className={`hero-glow ${hoveredObject==='computer'?'is-visible':''}`} src="/assets/hero-states/computer.webp" alt="" fill priority sizes="100vw" aria-hidden="true" />
-      <Image className={`hero-glow ${hoveredObject==='files'?'is-visible':''}`} src="/assets/hero-states/files.webp" alt="" fill priority sizes="100vw" aria-hidden="true" />
+      <Image src={asset('/assets/hero.png')} alt="深蓝色的设计师工作室场景" fill priority sizes="100vw" />
+      <Image className={`hero-glow ${hoveredObject==='portrait'?'is-visible':''}`} src={asset('/assets/hero-states/portrait.webp')} alt="" fill priority sizes="100vw" aria-hidden="true" />
+      <Image className={`hero-glow ${hoveredObject==='computer'?'is-visible':''}`} src={asset('/assets/hero-states/computer.webp')} alt="" fill priority sizes="100vw" aria-hidden="true" />
+      <Image className={`hero-glow ${hoveredObject==='files'?'is-visible':''}`} src={asset('/assets/hero-states/files.webp')} alt="" fill priority sizes="100vw" aria-hidden="true" />
       <div className="hero-vignette" />
       <div className="intro"><p>WELCOME TO MY CREATIVE SPACE</p><h1>小明 <em>/ Finn</em></h1><h2>{t.intro.split('\n').map((line,i)=><span key={line}>{line}{i===0&&<br/>}</span>)}</h2><div className="status"><i/> AVAILABLE FOR CREATIVE PROJECTS</div></div>
       <Hotspot className="portrait" index="01" title={t.resume} en="ABOUT & RESUME" onActive={setHoveredObject} onClick={()=>openSection('resume')}/>
@@ -106,9 +107,9 @@ function Resume({lang}:{lang:Lang}){
     <div className="resume-copy"><p className="eyebrow">ABOUT / RESUME</p><h2>{copy[lang].aboutTitle}</h2><p className="lead">{lang==='zh'?'我是小明，一名专注于视觉表达与智能创作的 AIGC 视觉设计师。我关注设计、技术与叙事之间的连接，持续探索生成式人工智能在真实设计场景中的更多可能。':'I’m Finn, an AIGC Visual Designer exploring the intersection of visual communication, intelligent tools and storytelling.'}</p>
       <div className="resume-meta"><div><span>ROLE</span><b>{copy[lang].role}</b></div><div><span>FOCUS</span><b>AIGC · Visual · UI/UX · IP</b></div><div><span>CONTACT</span><b>1574287349@qq.com<br/>888888</b></div></div>
       <div className="social-row"><span>站酷 · 剥虾的霸王龙</span><span>小红书 · 剥虾霸王龙</span><span>抖音 · 剥虾的霸王龙</span></div>
-      <a className="primary-btn" href="/assets/resume/resume.jpg" download>{lang==='zh'?'下载简历（占位版）':'Download Resume (placeholder)'} ↓</a>
+      <a className="primary-btn" href={asset('/assets/resume/resume.jpg')} download>{lang==='zh'?'下载简历（占位版）':'Download Resume (placeholder)'} ↓</a>
     </div>
-    <div className="resume-card"><Image src="/assets/resume/resume.jpg" alt="实验性简历风格占位图" width={1240} height={1755}/><span>信息将在最终版本中替换 / Content placeholder</span></div>
+    <div className="resume-card"><Image src={asset('/assets/resume/resume.jpg')} alt="实验性简历风格占位图" width={1240} height={1755}/><span>信息将在最终版本中替换 / Content placeholder</span></div>
   </div>;
 }
 
@@ -121,7 +122,7 @@ function ProjectViewer({id,lang,zoom,setZoom,onBack}:{id:ProjectId;lang:Lang;zoo
   const p=projectData.find(x=>x.id===id)!;
   if(id==='game') return <MemoryGame lang={lang} onBack={onBack}/>;
   if(!p.available) return <div className="content coming-soon"><button onClick={onBack}>← {lang==='zh'?'返回文件夹':'Back to folders'}</button><Image src={p.folder} alt={p.title} width={1500} height={1500}/><h2>{lang==='zh'?p.title:p.en}</h2><p>{lang==='zh'?'项目内容正在整理，之后只需替换项目长图即可上线。':'Project content is being prepared. A new long image can be swapped in later.'}</p></div>;
-  const slices=Array.from({length:8},(_,i)=>`/assets/projects/${id}/${String(i+1).padStart(2,'0')}.webp`);
+  const slices=Array.from({length:8},(_,i)=>asset(`/assets/projects/${id}/${String(i+1).padStart(2,'0')}.webp`));
   return <div className="viewer">
     <div className="viewer-toolbar"><button onClick={onBack}>← {lang==='zh'?'项目文件夹':'Projects'}</button><div><b>{lang==='zh'?p.title:p.en}</b></div><div className="zoom-tools"><button onClick={()=>setZoom(Math.max(.6,zoom-.1))}>−</button><span>{Math.round(zoom*100)}%</span><button onClick={()=>setZoom(Math.min(1.8,zoom+.1))}>＋</button><button onClick={()=>setZoom(1)}>↺</button></div></div>
     {p.interactive&&<button className="prototype-toggle" onClick={()=>setShowPrototype(!showPrototype)} aria-expanded={showPrototype}>{showPrototype?(lang==='zh'?'隐藏演示':'Hide demo'):(lang==='zh'?'显示演示':'Show demo')}</button>}

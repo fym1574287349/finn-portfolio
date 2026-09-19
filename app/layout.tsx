@@ -1,31 +1,22 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+import { asset } from './asset';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://finn-aigc-portfolio.fanyiming555.chatgpt.site'),
   title: 'Finn — AIGC Visual Designer',
   description: '小明 / Finn 的个人设计作品集，探索 AIGC、视觉设计与数字体验。',
-  icons: { icon: '/icon.png' },
+  icons: { icon: asset('/icon.png') },
   openGraph: {
     title: 'Finn — AIGC Visual Designer',
     description: '小明 / Finn 的个人设计作品集，探索 AIGC、视觉设计与数字体验。',
-    images: ['/og.png'],
+    images: [asset('/og.png')],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Finn — AIGC Visual Designer',
     description: '小明 / Finn 的个人设计作品集。',
-    images: ['/og.png'],
+    images: [asset('/og.png')],
   },
 };
 
@@ -36,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body>
         {children}
       </body>
     </html>
