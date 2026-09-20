@@ -72,7 +72,7 @@ export default function MemoryGame({ lang, onBack }: { lang: 'zh' | 'en'; onBack
     <div className="memory-stage">
       <section className="memory-screen" aria-label={zh ? '卡牌翻翻乐，60 秒配对挑战' : 'Card matching, 60-second challenge'}>
         <img className="memory-background" src={assetRoot + 'background.webp'} alt="" aria-hidden="true" draggable={false}/>
-        <h1 className="sr-only">{zh ? '卡牌翻翻乐' : 'Memory Match'}</h1>
+        <h1 className="memory-sr">{zh ? '卡牌翻翻乐' : 'Memory Match'}</h1>
         {!zh && <div className="memory-english-title">Memory Match</div>}
         <button className="memory-back" onClick={onBack} aria-label={zh ? '返回项目文件夹' : 'Back to projects'}/>
         <button className="memory-restart" onClick={start} disabled={!ready || finished} aria-label={zh ? '重新开始本局' : 'Restart round'}/>
