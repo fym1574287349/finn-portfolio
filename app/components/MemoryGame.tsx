@@ -7,7 +7,7 @@ import { asset } from '../asset';
 
 const assetRoot = asset('/assets/game/');
 const cardNames = ['幸运金币', '卡片二', '卡片三', '卡片四', '卡片五', '卡片六'];
-const sources = ['background.webp', 'card-back.webp', ...Array.from({ length: 6 }, (_, i) => `card-${i + 1}.webp`)];
+const sources = ['loading-background.webp', 'background.webp', 'start-button.webp', 'replay-button.webp', 'card-back.webp', ...Array.from({ length: 6 }, (_, i) => `card-${i + 1}.webp`)];
 
 export default function MemoryGame({ lang, onBack }: { lang: 'zh' | 'en'; onBack: () => void }) {
   const zh = lang === 'zh';
@@ -71,7 +71,7 @@ export default function MemoryGame({ lang, onBack }: { lang: 'zh' | 'en'; onBack
     </div>
     <div className="memory-stage">
       <section className="memory-screen" aria-label={zh ? '卡牌翻翻乐，60 秒配对挑战' : 'Card matching, 60-second challenge'}>
-        <img className="memory-background" src={assetRoot + 'background.webp'} alt="" aria-hidden="true" draggable={false}/>
+        <img className="memory-background" src={assetRoot + (game.phase === 'ready' ? 'loading-background.webp' : 'background.webp')} alt="" aria-hidden="true" draggable={false}/>
         <h1 className="memory-sr">{zh ? '卡牌翻翻乐' : 'Memory Match'}</h1>
         {!zh && <div className="memory-english-title">Memory Match</div>}
         <button className="memory-back" onClick={onBack} aria-label={zh ? '返回项目文件夹' : 'Back to projects'}/>
@@ -86,7 +86,7 @@ export default function MemoryGame({ lang, onBack }: { lang: 'zh' | 'en'; onBack
           <p>{failed ? (zh ? '素材加载失败，请重试' : 'Could not load images. Try again.') : ready ? (zh ? '加载完成 100%' : 'Ready 100%') : (zh ? `加载中 ${progress}%` : `Loading ${progress}%`)}</p>
           <div className="memory-start-area">
             {failed ? <button className="memory-primary" onClick={() => setAttempt(value => value + 1)}>{zh ? '重新加载' : 'Retry loading'}</button> : ready && <>
-              <button className="memory-primary" onClick={start}>{zh ? '开始游戏' : 'Start game'}</button>
+              <button className={zh ? 'memory-image-button' : 'memory-primary'} onClick={start} aria-label={zh ? '开始游戏' : 'Start game'}>{zh ? <img src={assetRoot + 'start-button.webp'} alt="" width={876} height={356} draggable={false}/> : 'Start game'}</button>
               <p className="memory-rules">{zh ? <>60 秒内找到 6 组相同卡牌<br/>每组 10 分 · 满分 60 分</> : <>Find 6 matching pairs in 60 seconds<br/>10 points per pair · 60 points to win</>}</p>
             </>}
           </div>
@@ -119,7 +119,7 @@ export default function MemoryGame({ lang, onBack }: { lang: 'zh' | 'en'; onBack
               <h2 id="memory-result-title">{game.phase === 'won' ? (zh ? '挑战成功！' : 'You did it!') : (zh ? '时间到！' : 'Time’s up!')}</h2>
               <p className="memory-result-score"><strong>{score}</strong><span> / 60</span></p>
               <p>{game.phase === 'won' ? (zh ? `成功配对 6 组，剩余 ${game.seconds} 秒` : `All 6 pairs found with ${game.seconds}s left`) : (zh ? `已找到 ${game.matched.length / 2} / 6 组，再试一次吧` : `${game.matched.length / 2} / 6 pairs found. Try again!`)}</p>
-              <button ref={replayRef} className="memory-primary" onClick={start}>{zh ? '再玩一次' : 'Play again'}</button>
+              <button ref={replayRef} className={zh ? 'memory-image-button' : 'memory-primary'} onClick={start} aria-label={zh ? '再玩一次' : 'Play again'}>{zh ? <img src={assetRoot + 'replay-button.webp'} alt="" width={876} height={356} draggable={false}/> : 'Play again'}</button>
               <button className="memory-result-back" onClick={onBack}>{zh ? '返回项目' : 'Back to projects'}</button>
             </div>
           </div>}
